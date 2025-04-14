@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Astro Basics</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>ETA checker for Paper</h1>
+      <p>
+        This site uses an undocumented API in <a
+          href="https://github.com/PaperMC/bibliothek/"
+          target="_blank">PaperMC/bibliothek</a
+        >, the downloads API
+      </p>
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #app {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	/* height: 100%; */
+	padding: 2em;
+  }
+</style>

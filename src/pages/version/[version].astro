@@ -1,0 +1,58 @@
+---
+import { getMinecraftLauncherManifest, getPaperVersionInfo, paperVersionStatusToDisplay } from '~/components/minecraft';
+import Base from '~/layouts/Base.astro';
+
+import type {
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
+import PaperETAStatus from '~/components/PaperETAStatus.vue';
+
+export const getStaticPaths = (async () => {
+    const manifest = await getMinecraftLauncherManifest();
+
+    return [
+        ...manifest.versions.map((version) => ({
+            params: { version: version.id },
+            props: { version: version.id },
+        })),
+        {
+            params: { version: 'latest' },
+            props: { version: manifest.latest.release },
+        },
+        {
+            params: { version: 'snapshot' },
+            props: { version: manifest.latest.snapshot },
+        },
+    ];
+}) satisfies GetStaticPaths;
+
+// type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+// const { version: currentSlug } = Astro.params;
+const { version } = Astro.props;
+const paperVersionInfo = (await getPaperVersionInfo())[version];
+const displayPaperVersionInfo = paperVersionStatusToDisplay(paperVersionInfo);
+---
+
+<Base>
+    <a href="/">Back</a>
+
+    <h1>Paper for Minecraft Version {version}</h1>
+    <div>
+    {
+        paperVersionInfo ? (
+                <p>Paper for {version} is currently {displayPaperVersionInfo}</p>
+            
+        ) : (
+                <p>Paper for {version} is not available</p>
+                <h2>ETA testing</h2>
+                <PaperETAStatus version={version} client:load />
+        
+        )
+    }
+    
+    </div>
+</Base>

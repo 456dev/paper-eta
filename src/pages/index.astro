@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Base from "../layouts/Base.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { getMinecraftLauncherManifest } from "~/components/minecraft";
+
+const vanillaManifest = await getMinecraftLauncherManifest();
+
+
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<Base>
+	<div class="version-box">
+	<div>
+		<div>
+			<a href={`/version/latest`}><span class="version-type">release</span>Latest - {vanillaManifest.latest.release}</a>
+		</div>
+		<div>
+			<a href={`/version/snapshot`}><span class="version-type">snapshot</span>Latest - {vanillaManifest.latest.snapshot}</a>
+		</div>
+		
+	</div>
+	<hr/>
+	<div>
+
+		{
+			vanillaManifest.versions.map((version) => (
+				<div data-version={version.id}>
+					<a href={`/version/${version.id}`}><span class="version-type">{version.type}</span>{version.id}</a>
+				</div>
+			))
+		}
+	</div>
+</div>
+
+	<style>
+	.version-box {
+		margin: 1em;
+	}
+		.version-type {
+			
+			text-transform: capitalize;
+			width: 6em;
+			display: inline-block;
+			font-weight: bold;
+			text-align: right;
+			margin-right: 1em;
+		}
+		.version-type:hover {
+			text-decoration: underline;
+		}
+	</style>
+
+	
+</Base>
