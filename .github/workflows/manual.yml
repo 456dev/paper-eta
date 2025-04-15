@@ -1,0 +1,10 @@
+name: Manual redeploy main branch
+on:
+  workflow_dispatch:
+  
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: redeploy
+      run: curl -X POST "${{secrets.CLOUDFLARE_DEPLOY_HOOK_URL}}"
