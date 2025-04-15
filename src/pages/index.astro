@@ -5,6 +5,20 @@ import { getMinecraftLauncherManifest } from "~/components/minecraft";
 
 const vanillaManifest = await getMinecraftLauncherManifest();
 
+function remapType(type: string): string {
+	switch (type) {
+		case "release":
+			return "release";
+		case "snapshot":
+			return "snapshot";
+		case "old_alpha":
+			return "alpha";
+		case "old_beta":
+			return "beta";
+		default:
+			return type;
+	}
+}
 
 ---
 
@@ -12,10 +26,10 @@ const vanillaManifest = await getMinecraftLauncherManifest();
 	<div class="version-box">
 	<div>
 		<div>
-			<a href={`/version/latest`}><span class="version-type">release</span>Latest - {vanillaManifest.latest.release}</a>
+			<a href={`/version/latest`}><span class="version-type">{remapType("release")}</span>Latest - {vanillaManifest.latest.release}</a>
 		</div>
 		<div>
-			<a href={`/version/snapshot`}><span class="version-type">snapshot</span>Latest - {vanillaManifest.latest.snapshot}</a>
+			<a href={`/version/snapshot`}><span class="version-type">{remapType("snapshot")}</span>Latest - {vanillaManifest.latest.snapshot}</a>
 		</div>
 		
 	</div>
@@ -25,7 +39,7 @@ const vanillaManifest = await getMinecraftLauncherManifest();
 		{
 			vanillaManifest.versions.map((version) => (
 				<div data-version={version.id}>
-					<a href={`/version/${version.id}`}><span class="version-type">{version.type}</span>{version.id}</a>
+					<a href={`/version/${version.id}`}><span class="version-type">{remapType(version.type)}</span>{version.id}</a>
 				</div>
 			))
 		}
