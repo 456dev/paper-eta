@@ -2,6 +2,7 @@
 import og from "~/assets/og.png";
 import favicon from "~/assets/favicon.png";
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,7 +14,10 @@ import favicon from "~/assets/favicon.png";
     <meta property="og:url" content={Astro.url.href} />
 
     <meta property="og:image" content={Astro.url.origin + og.src} />
-    <meta property="og:description" content="Find out when Paper will release for a specific minecraft version." />
+    <meta
+      property="og:description"
+      content="Find out when Paper will release for a specific minecraft version."
+    />
 
     <title>Paper ETA Lookup</title>
   </head>
@@ -29,6 +33,19 @@ import favicon from "~/assets/favicon.png";
       <main>
         <slot />
       </main>
+      <footer>
+        <small
+          >Made by <a href="https://github.com/456dev" target="_blank">456dev</a
+          ></small
+        >
+        <br />
+        <small>This site is Unaffiliated with PaperMC and Mojang</small>
+        <br />
+        <small
+          >NOT AN OFFICIAL MINECRAFT SERVICE, NOT APPROVED BY OR ASSOCIATED WITH
+          MOJANG OR MICROSOFT</small
+        >
+      </footer>
     </div>
   </body>
 </html>
@@ -42,10 +59,10 @@ import favicon from "~/assets/favicon.png";
   }
 
   #app {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
   }
 </style>
