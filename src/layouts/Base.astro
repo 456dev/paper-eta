@@ -12,7 +12,7 @@ import favicon from "~/assets/favicon.png";
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.href} />
 
-    <meta property="og:image" content={og.src} />
+    <meta property="og:image" content={Astro.url.origin + og.src} />
     <meta property="og:description" content="Find out when Paper will release for a specific minecraft version." />
 
     <title>Paper ETA Lookup</title>
