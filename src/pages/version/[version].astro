@@ -40,8 +40,8 @@ const displayPaperVersionInfo = paperVersionStatusToDisplay(paperVersionInfo);
 <Base>
     <a href="/">Back</a>
 
+    <div class="version-box">
     <h1>Paper for Minecraft Version {version}</h1>
-    <div>
     {
         paperVersionInfo ? (
                 <p>Paper for {version} is currently {displayPaperVersionInfo}</p>
@@ -55,4 +55,10 @@ const displayPaperVersionInfo = paperVersionStatusToDisplay(paperVersionInfo);
     }
     
     </div>
+
+    <style>
+        .version-box {
+            margin-bottom: 5em;
+        }
+    </style>
 </Base>
