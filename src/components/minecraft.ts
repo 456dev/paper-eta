@@ -102,7 +102,7 @@ async function fetchAndProcessAllPaperVersionInfo(): Promise<
     const status = versionInfo[version];
     if (!latestStableVersion && status === PaperVersionStatus.LATEST) {
       latestStableVersion = version;
-    } else if (latestStableVersion && status in [PaperVersionStatus.LATEST, PaperVersionStatus.EXPERIMENTAL]) {
+    } else if (latestStableVersion && (status === PaperVersionStatus.LATEST || status === PaperVersionStatus.EXPERIMENTAL)) {
       versionInfo[version] = PaperVersionStatus.OUTDATED;
     }
   }
